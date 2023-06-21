@@ -1,5 +1,7 @@
 package com.pablo.spring.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,6 +17,7 @@ public class Course {
     @Id
     // The @GeneratedValue annotation specifies the strategy for generating the ID values
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonProperty("_id")
     private Long id;
 
     // The @Column annotation is used to specify the mapping of the 'name' field to a database column
