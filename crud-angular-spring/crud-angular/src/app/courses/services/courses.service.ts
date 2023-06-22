@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Course } from '../models/course';
-import { Observable, delay, first, tap } from 'rxjs';
+import { Observable, first, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root' // This service is provided at the root level
