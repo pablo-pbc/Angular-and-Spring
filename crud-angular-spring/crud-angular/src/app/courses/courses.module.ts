@@ -5,10 +5,12 @@ import { AppMaterialModule } from '../shared/app-material/app-material.module';
 import { SharedModule } from '../shared/shared.module';
 import { CoursesRoutingModule } from './courses-routing.module';
 import { CoursesComponent } from './courses/courses.component';
+import { CourseFormComponent } from './course-form/course-form.component';
 
 @NgModule({
   declarations: [
-    CoursesComponent, // Declaring the CoursesComponent within the CoursesModule
+    CoursesComponent,
+    CourseFormComponent, // Declaring the CoursesComponent within the CoursesModule
   ],
   imports: [
     CommonModule, // Importing the CommonModule, which provides common Angular directives and pipes

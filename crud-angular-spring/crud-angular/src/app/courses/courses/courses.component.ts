@@ -5,6 +5,7 @@ import { ErrorDialogComponent } from 'src/app/shared/component/error-dialog/erro
 
 import { Course } from '../models/course';
 import { CoursesService } from '../services/courses.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-courses',
@@ -14,11 +15,13 @@ import { CoursesService } from '../services/courses.service';
 export class CoursesComponent implements OnInit {
 
   courses$: Observable<Course[]>; // Observable variable to store the course list
-  displayedColumns: string[] = ['name', 'category'];
+  displayedColumns: string[] = ['name', 'category', 'actions'];
 
   constructor(
     private coursesService: CoursesService, // Injecting the CoursesService
-    public dialog: MatDialog // Injecting the MatDialog service for displaying the error dialog
+    public dialog: MatDialog, // Injecting the MatDialog service for displaying the error dialog
+    private router: Router, // Class to control the rounting on Angular
+    private route: ActivatedRoute // Class to get the current route/URL
   ) {
     // Fetching the course list and handling any errors
     this.courses$ = this.coursesService.list().pipe(
@@ -37,4 +40,9 @@ export class CoursesComponent implements OnInit {
   }
 
   ngOnInit(): void { }
+
+  // Function to navigate to the course form page
+  onAdd() {
+    this.router.navigate(['new'], {relativeTo: this.route}); // Append 'new' to the current URL
+  }
 }

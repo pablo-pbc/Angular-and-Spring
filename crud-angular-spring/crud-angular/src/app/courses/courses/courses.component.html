@@ -16,8 +16,30 @@
           <th mat-header-cell *matHeaderCellDef>Category</th>
           <!-- The TD was make using the ngFor diretive -->
           <td mat-cell *matCellDef="let course">{{ course.category }}
-            <mat-icon aria-hidden="false" aria-label="Course Category" fontIcon="{{ course.category | category }}"></mat-icon>
+            <mat-icon aria-hidden="false" aria-label="Course Category"
+              fontIcon="{{ course.category | category }}"></mat-icon>
           </td>
+        </ng-container>
+
+        <!-- Action Column -->
+        <ng-container matColumnDef="actions">
+          <mat-header-cell *matHeaderCellDef>
+            <!-- Add button -->
+            <button mat-mini-fab color="accent" aria-label="Add new course" (click)="onAdd()">
+              <mat-icon>add</mat-icon>
+            </button>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let course">
+            <!-- Edit button -->
+            <button mat-icon-button color="primary" aria-label="Edit course">
+              <mat-icon>edit</mat-icon>
+            </button>
+
+            <!-- Delete button -->
+            <button mat-icon-button color="warn" aria-label="Delete course">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </mat-cell>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
