@@ -25,7 +25,7 @@ export class CoursesService {
   }
 
   // Function to add the new course
-  save(record: Course) {
+  save(record: Partial<Course>) {
     return this.httpClient.post<Course>(this.API, record) // Making an HTTP POST to sent the new course
     .pipe(
       first()
