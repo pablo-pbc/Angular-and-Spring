@@ -15,11 +15,20 @@ export class CoursesService {
     // Injecting the HttpClient dependency into the service
   }
 
+  // Function to list all courses
   list(): Observable<Course[]> {
     return this.httpClient.get<Course[]>(this.API) // Making an HTTP GET request to fetch the course list
       .pipe(
         first(), // Taking only the first emitted value
         tap(courses => console.log(courses)) // Logging the courses to the console
       );
+  }
+
+  // Function to add the new course
+  save(record: Course) {
+    return this.httpClient.post<Course>(this.API, record) // Making an HTTP POST to sent the new course
+    .pipe(
+      first()
+    );
   }
 }
