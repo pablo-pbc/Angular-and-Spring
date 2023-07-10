@@ -6,6 +6,7 @@ import { SharedModule } from '../shared/shared.module';
 import { CoursesRoutingModule } from './courses-routing.module';
 import { CoursesComponent } from './courses/courses.component';
 import { CourseFormComponent } from './course-form/course-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { CourseFormComponent } from './course-form/course-form.component';
     CoursesRoutingModule, // Importing the CoursesRoutingModule, which likely contains routing configurations for the CoursesModule
     AppMaterialModule, // Importing the AppMaterialModule, which likely contains Angular Material module imports
     SharedModule, // Importing the SharedModule, which provides shared components, directives, and pipes
+    ReactiveFormsModule // Importing the ReactiveFormsModulo, which provides methods to create form
   ],
 })
 export class CoursesModule {}

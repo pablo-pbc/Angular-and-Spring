@@ -1,0 +1,21 @@
+mat-icon {
+  color: #2196f3;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+mat-card {
+  max-width: 80%;
+  margin: 2em auto;
+}
+
+.mdc-card__actions {
+  justify-content: space-between;
+}
+
+.mat-toolbar.mat-primary {
+  border-radius: 5px;
+  margin: 0 0 15px 0;
+}
