@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,7 +37,7 @@ public class CoursesController {
     @GetMapping("/{id}")
     public ResponseEntity<Course> findById(@PathVariable Long id){
         return courseRepository.findById(id)
-            .map(resultFound -> ResponseEntity.ok().body(resultFound))
+            .map(recordFound -> ResponseEntity.ok().body(recordFound))
             .orElse(ResponseEntity.notFound().build());
     }
 
@@ -48,14 +49,25 @@ public class CoursesController {
     }
 
     // This method handles the HTTP POST to update a course into database
-    @PutMapping("/edit/{id}")
-    public ResponseEntity<Course> update(@PathVariable("id") Long courseId, @RequestBody Course courseUpdate) {
-        return courseRepository.findById(courseId)
-            .map(resultFound -> {
-                resultFound.setName(courseUpdate.getName());
-                resultFound.setCategory(courseUpdate.getCategory());
-                Course updated = courseRepository.save(resultFound);
+    @PutMapping("/{id}")
+    public ResponseEntity<Course> update(@PathVariable Long id, @RequestBody Course course) {
+        return courseRepository.findById(id)
+            .map(recordFound -> {
+                recordFound.setName(course.getName());
+                recordFound.setCategory(course.getCategory());
+                Course updated = courseRepository.save(recordFound);
                 return ResponseEntity.ok().body(updated);
+            })
+            .orElse(ResponseEntity.notFound().build());
+    }
+
+    // This method handles the HTTP POST to delete the course selected
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id){
+        return courseRepository.findById(id)
+            .map(recordFound -> {
+                courseRepository.deleteById(id);
+                return ResponseEntity.noContent().<Void>build();
             })
             .orElse(ResponseEntity.notFound().build());
     }

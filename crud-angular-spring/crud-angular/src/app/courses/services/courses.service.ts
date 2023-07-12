@@ -26,7 +26,6 @@ export class CoursesService {
 
   // Function to save the methods create and update and delete
   save(record: Partial<Course>) {
-    console.log(record)
     if (record._id) {
       return this.update(record);
     }
@@ -35,18 +34,17 @@ export class CoursesService {
 
   // Private function to handle the method to create a new course
   private create(record: Partial<Course>) {
-    return this.httpClient.post<Course>(this.API, record)
-    .pipe(
-      first()
-    );
+    return this.httpClient.post<Course>(this.API, record).pipe(first());
   }
 
   // Private function to handle the method to update a course
   private update(record: Partial<Course>) {
-    return this.httpClient.put<Course>(`${this.API}/edit/${record._id}`, record)
-    .pipe(
-      first()
-    );
+    return this.httpClient.put<Course>(`${this.API}/${record._id}`, record).pipe(first());
+  }
+
+  // Private function to handle the method to delete a course
+  remove(id: string) {
+    return this.httpClient.delete(`${this.API}/${id}`).pipe(first());
   }
 
   // Function to return the URL from the selected course
