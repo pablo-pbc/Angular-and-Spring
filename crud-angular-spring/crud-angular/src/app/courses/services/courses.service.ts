@@ -20,15 +20,37 @@ export class CoursesService {
     return this.httpClient.get<Course[]>(this.API) // Making an HTTP GET request to fetch the course list
       .pipe(
         first(), // Taking only the first emitted value
-        tap(courses => console.log(courses)) // Logging the courses to the console
+        // tap(courses => console.log(courses)) // Logging the courses to the console
       );
   }
 
-  // Function to add the new course
+  // Function to save the methods create and update and delete
   save(record: Partial<Course>) {
-    return this.httpClient.post<Course>(this.API, record) // Making an HTTP POST to sent the new course
+    console.log(record)
+    if (record._id) {
+      return this.update(record);
+    }
+    return this.create(record);
+  }
+
+  // Private function to handle the method to create a new course
+  private create(record: Partial<Course>) {
+    return this.httpClient.post<Course>(this.API, record)
     .pipe(
       first()
     );
+  }
+
+  // Private function to handle the method to update a course
+  private update(record: Partial<Course>) {
+    return this.httpClient.put<Course>(`${this.API}/edit/${record._id}`, record)
+    .pipe(
+      first()
+    );
+  }
+
+  // Function to return the URL from the selected course
+  loadById(id: string) {
+    return this.httpClient.get<Course>(`${this.API}/${id}`);
   }
 }
