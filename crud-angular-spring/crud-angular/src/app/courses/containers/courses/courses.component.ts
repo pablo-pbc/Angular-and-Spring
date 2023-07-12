@@ -3,8 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { catchError, Observable, of } from 'rxjs';
 import { ErrorDialogComponent } from 'src/app/shared/component/error-dialog/error-dialog.component';
 
-import { Course } from '../models/course';
-import { CoursesService } from '../services/courses.service';
+import { Course } from '../../models/course';
+import { CoursesService } from '../../services/courses.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -15,7 +15,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class CoursesComponent implements OnInit {
 
   courses$: Observable<Course[]>; // Observable variable to store the course list
-  displayedColumns: string[] = ['name', 'category', 'actions'];
 
   constructor(
     private coursesService: CoursesService, // Injecting the CoursesService
@@ -41,8 +40,13 @@ export class CoursesComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  // Function to navigate to the course form page
+  // Function to navigate to the course form page and create a new course
   onAdd() {
     this.router.navigate(['new'], {relativeTo: this.route}); // Append 'new' to the current URL
+  }
+
+  // Function to navigate to the course form page and edit the selected course
+  onEdit(course: Course) {
+    this.router.navigate(['edit', course._id], {relativeTo: this.route}); // Append 'edit/id' to the current URL
   }
 }
